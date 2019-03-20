@@ -1,28 +1,61 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container>
+      <app-header></app-header>
+      <b-row >
+          <b-col cols="12">
+            <transition name="slide" type="animation"  mode="out-in">
+              <router-view></router-view>
+            </transition>
+          </b-col>
+      </b-row>
+      
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Header from './components/Navbar.vue'
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    appHeader: Header
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+.slide-enter {
+opacity:0;
+}
+
+.slide-enter-active {
+  animation: slide-in .15s ease-out forwards;
+  transition: opacity .15s;
+}
+
+.slide-leave {
+
+}
+
+.slide-leave-active {
+  animation: slide-out .15s ease-out forwards;
+  transition: opacity .15s;
+  opacity: 0;
+}
+
+@keyframes slide-in {
+  from {
+  transform: translateY(20px);
+  } to {
+    transform: translateY(0);
+  }
+}
+@keyframes slide-out {
+  from {
+  transform: translateY(0);
+  } to {
+    transform: translateY(20px);
+  }
 }
 </style>
